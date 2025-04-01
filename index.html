@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>פירות פרימיום ברמת נבון</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #8e44ad;
+            --primary-light: #9b59b6;
+            --primary-dark: #703688;
+            --secondary: #2ecc71;
+            --secondary-dark: #27ae60;
+            --accent: #f39c12;
+            --text-dark: #2c3e50;
+            --text-light: #7f8c8d;
+            --white: #ffffff;
+            --light-bg: #f9f9f9;
+            --border: #e0e0e0;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --success: #2ecc71;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Rubik', 'Segoe UI', Tahoma, 'Arial Hebrew', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .header {
+            background-color: #2c3e50;
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            padding: 60px 0 80px;
+            text-align: center;
+            border-bottom-left-radius: 50% 10%;
+            border-bottom-right-radius: 50% 10%;
+            margin-bottom: -40px;
+            position: relative;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            border-bottom-left-radius: 50% 10%;
+            border-bottom-right-radius: 50% 10%;
+        }
+        
+        .header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+        
+        .fruit-emoji {
+            font-size: 2.5rem;
+            margin: 0 5px;
+            animation: float 3s infinite ease-in-out;
+        }
+        
+        .fruit-emoji:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+        
+        .fruit-emoji:nth-child(3) {
+            animation-delay: 1s;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+        
+        .main-content {
+            background-color: var(--white);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px var(--shadow);
+            padding: 40px;
+            margin-bottom: 50px;
+            position: relative;
+            z-index: 2;
+            margin-top: -60px; /* Increased negative margin to prevent overlap */
+        }
+        
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        .section:last-child {
+            margin-bottom: 0;
+        }
+        
+        .section-title {
+            color: var(--primary);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-light);
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+        
+        .info-box {
+            background-color: rgba(142, 68, 173, 0.05);
+            border-right: 4px solid var(--primary);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        
+        .info-title {
+            color: var(--primary-dark);
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+        }
+        
+        .info-list {
+            list-style-type: none;
+        }
+        
+        .info-list li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-right: 25px;
+        }
+        
+        .info-list li::before {
+            content: "•";
+            position: absolute;
+            right: 0;
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        
+        .card {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 30px;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            background-color: var(--white);
+            border: none;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+        }
+        
+        .card-header {
+            background: var(--secondary);
+            color: var(--white);
+            padding: 25px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card-header::after {
+            content: '';
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+        }
+        
+        .card-title {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .card-price {
+            font-size: 2.3rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .card-price::before {
+            content: '₪';
+            font-size: 1.5rem;
+            margin-left: 5px;
+        }
+        
+        .card-body {
+            padding: 30px 25px;
+            flex-grow: 1;
+            background-color: var(--white);
+        }
+        
+        .fruit-list {
+            list-style-type: none;
+            margin-bottom: 20px;
+        }
+        
+        .fruit-list li {
+            margin-bottom: 16px;
+            padding-right: 35px;
+            position: relative;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .fruit-list li::before {
+            content: attr(data-emoji);
+            position: absolute;
+            right: 0;
+            font-size: 1.4rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+        }
+        
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(142, 68, 173, 0.3);
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary);
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--secondary-dark);
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+        }
+        
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(142, 68, 173, 0.1);
+        }
+        
+        .form-select {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232c3e50' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: left 15px center;
+            background-size: 15px;
+        }
+        
+        .form-select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(142, 68, 173, 0.1);
+        }
+        
+        .kashrut-note {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: rgba(127, 140, 141, 0.1);
+        }
+        
+        .required::after {
+            content: "*";
+            color: #e74c3c;
+            margin-right: 5px;
+        }
+        
+        .footer {
+            background-color: var(--text-dark);
+            color: var(--white);
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .contact-info {
+            margin-top: 20px;
+        }
+        
+        .contact-item {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .contact-item i {
+            margin-left: 10px;
+            color: var(--accent);
+        }
+        
+        .success-message {
+            background-color: rgba(46, 204, 113, 0.1);
+            border: 1px solid var(--success);
+            color: var(--success);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 30px;
+            display: none;
+        }
+        
+        .order-image {
+            width: 100%;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px var(--shadow);
+        }
+        
+        .important-dates {
+            font-weight: bold;
+            color: #e74c3c;
+        }
+        
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+        
+        .quantity-btn {
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--light-bg);
+            border: 1px solid var(--border);
+            cursor: pointer;
+        }
+        
+        .quantity-btn:first-child {
+            border-radius: 8px 0 0 8px;
+        }
+        
+        .quantity-btn:last-child {
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .quantity-input {
+            width: 60px;
+            height: 40px;
+            text-align: center;
+            font-size: 1rem;
+            border: 1px solid var(--border);
+            border-left: none;
+            border-right: none;
+        }
+        
+        .quantity-input:focus {
+            outline: none;
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                padding: 40px 0 120px; /* Even more bottom padding on mobile */
+            }
+            
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .fruit-emoji {
+                font-size: 2rem;
+            }
+            
+            .main-content {
+                padding: 25px;
+                margin-top: -50px; /* Adjusted for mobile */
+            }
+            
+            .card-title {
+                font-size: 1.4rem;
+            }
+            
+            .card-price {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.6rem;
+            }
+            
+            .packages-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container" style="position: relative; z-index: 1;">
+            <img src="/api/placeholder/1000/600" alt="מארז פירות פרימיום" style="width: 100%; max-width: 800px; border-radius: 15px; margin-bottom: 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);">
+            <h1>פירות פרימיום ברמת נבון</h1>
+            <p>מארזי פירות טריים, עסיסיים, קלופים וחתוכים - איכות פרימיום עד הבית</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <main class="main-content">
+            <div class="success-message" id="successMessage">
+                <h3>תודה</h3>
+                <p>הזמנתך הועברה לטיפול</p>
+            </div>
+            
+            <section class="section">
+                <h2 class="section-title">ברוכים הבאים למיזם הפירות של רמת נבון</h2>
+                <div class="info-box">
+                    <p>תושבי רמת נבון היקרים 🌳</p>
+                    <p>אנחנו שמחים להשיק מיזם מקומי חדש, שמביא אלינו לרמת נבון פירות פרימיום – טריים,</p>
+                    <p>עסיסיים, קלופים וחתוכים – בדיוק כמו שאתם אוהבים!</p>
+                    
+                    <p style="margin-top: 20px; margin-bottom: 20px;">מושלמים לאירוח, כמתנה או פשוט כדי לפנק את עצמכם.</p>
+                    
+                    <p>אנו מרכזים הזמנות לכבוד חג הפסח ויום העצמאות 🙌.</p>
+                    <p>כל פרי מגיע באריזה נפרדת, מסודרת ונקייה.</p>
+                </div>
+                
+                <img src="/api/placeholder/1000/600" alt="מארזי פירות פרימיום" class="order-image">
+                
+                <div class="info-box">
+                    <h3 class="info-title">📅 פרטים חשובים להזמנה:</h3>
+                    <ul class="info-list">
+                        <li><span class="important-dates">המועד האחרון להזמנות עבור פסח: 6.4.25 (יום ראשון)</span></li>
+                        <li>איסוף עצמי: נחל סער 15</li>
+                        <li><span class="important-dates">תאריך האיסוף: 10.4.25</span></li>
+                        <li>שעות האיסוף: 16:00–20:00</li>
+                        <li>ליצירת קשר: 052-4448025</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2 class="section-title">המארזים שלנו</h2>
+                <p>בחרו את המארז המושלם עבורכם</p>
+                
+                <div class="packages-grid">
+                    <div class="card">
+                        <div class="card-header" style="background: #37AB85;">
+                            <h3 class="card-title">מארז פירות מפנק</h3>
+                            <div class="card-price">135</div>
+                        </div>
+                        <div class="card-body">
+                            <ul class="fruit-list">
+                                <li data-emoji="🍈">1 יחידות פומלה חתוך</li>
+                                <li data-emoji="🍍">1 יחידות אננס חתוך</li>
+                                <li data-emoji="🫐">1 אריזת אוכמניות (125 גרם)</li>
+                                <li data-emoji="🍇">ענבים ירוקים (500-700 גרם)</li>
+                                <li data-emoji="🍇">ענבים שחורים (500-700 גרם)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header" style="background: #9b59b6;">
+                            <h3 class="card-title">מארז פירות מפנק פלוס</h3>
+                            <div class="card-price">175</div>
+                        </div>
+                        <div class="card-body">
+                            <ul class="fruit-list">
+                                <li data-emoji="🍈">2 יחידות פומלה חתוך</li>
+                                <li data-emoji="🍍">2 יחידות אננס חתוך</li>
+                                <li data-emoji="🫐">2 אריזות אוכמניות (250 גרם)</li>
+                                <li data-emoji="🍇">ענבים ירוקים (500-700 גרם)</li>
+                                <li data-emoji="🍇">ענבים שחורים (500-700 גרם)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header" style="background: #F26B27;">
+                            <h3 class="card-title">מארז תמר מג'הול מהחלומות</h3>
+                            <div class="card-price">40</div>
+                        </div>
+                        <div class="card-body">
+                            <ul class="fruit-list">
+                                <li data-emoji="🌴">תמר מג'הול איכותי (500 גרם)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header" style="background: #F2A127;">
+                            <h3 class="card-title">מנגו חתוך בטעם גן עדן</h3>
+                            <div class="card-price">35</div>
+                        </div>
+                        <div class="card-body">
+                            <ul class="fruit-list">
+                                <li data-emoji="🥭">מנגו חתוך (300 גרם)</li>
+                            </ul>
+                            <p><small>* קיים עד גמר המלאי</small></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="kashrut-note">
+                    <strong>כשרות:</strong>
+                    <ul>
+                        <li>הפומלה: כשר בד"ץ</li>
+                        <li>שאר הפירות: כשרות רגילה או כשרות חו"ל</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2 class="section-title">טופס הזמנה</h2>
+                <p>מלאו את הטופס ואנחנו נדאג לכל השאר 🍇</p>
+                
+                <form id="orderForm" action="https://formspree.io/f/xrbpyzkb" method="POST">
+                    <input type="hidden" name="_next" value="https://yourwebsiteurl.com/?submitted=true">
+                    <input type="hidden" name="_subject" value="הזמנה חדשה - פירות פרימיום ברמת נבון">
+                    <input type="text" name="_gotcha" style="display:none">
+                    <div class="form-group">
+                        <label for="fullName" class="form-label required">שם פרטי+שם משפחה</label>
+                        <input type="text" id="fullName" name="fullName" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone" class="form-label required">טלפון נייד</label>
+                        <div style="display: flex; gap: 10px;">
+                            <input type="tel" id="phoneNumber" name="phoneNumber" class="form-control" placeholder="מספר טלפון" required>
+                            <select id="areaCode" name="areaCode" class="form-select" style="width: 30%; flex-shrink: 0;">
+                                <option value="050">050</option>
+                                <option value="051">051</option>
+                                <option value="052">052</option>
+                                <option value="053">053</option>
+                                <option value="054">054</option>
+                                <option value="055">055</option>
+                                <option value="058">058</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">בחר את המארזים שברצונך להזמין:</label>
+                        
+                        <div class="form-group">
+                            <label for="package1" class="form-label">🧺 מארז פירות מפנק – 135 ₪</label>
+                            <div class="quantity-selector">
+                                <button type="button" class="quantity-btn minus" data-target="package1">-</button>
+                                <input type="number" id="package1" name="package1" class="quantity-input" value="0" min="0">
+                                <button type="button" class="quantity-btn plus" data-target="package1">+</button>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="package2" class="form-label">🧺 מארז פירות מפנק פלוס – 175 ₪</label>
+                            <div class="quantity-selector">
+                                <button type="button" class="quantity-btn minus" data-target="package2">-</button>
+                                <input type="number" id="package2" name="package2" class="quantity-input" value="0" min="0">
+                                <button type="button" class="quantity-btn plus" data-target="package2">+</button>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="package3" class="form-label">🧺 מארז תמר מג'הול מהחלומות (500 גרם) - 40 ₪</label>
+                            <div class="quantity-selector">
+                                <button type="button" class="quantity-btn minus" data-target="package3">-</button>
+                                <input type="number" id="package3" name="package3" class="quantity-input" value="0" min="0">
+                                <button type="button" class="quantity-btn plus" data-target="package3">+</button>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="package4" class="form-label">מנגו חתוך בטעם גן עדן (300 גרם) - 35 ₪ (קיים עד גמר המלאי)</label>
+                            <div class="quantity-selector">
+                                <button type="button" class="quantity-btn minus" data-target="package4">-</button>
+                                <input type="number" id="package4" name="package4" class="quantity-input" value="0" min="0">
+                                <button type="button" class="quantity-btn plus" data-target="package4">+</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <input type="hidden" name="_subject" value="הזמנה חדשה - פירות פרימיום ברמת נבון">
+                    <input type="hidden" name="_template" value="table">
+                    
+                    <button type="submit" class="btn">שלח הזמנה</button>
+                </form>
+            </section>
+        </main>
+    </div>
+    
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>פירות פרימיום ברמת נבון</p>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="icon">📞</i>
+                        <span>052-4448025</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="icon">📍</i>
+                        <span>נחל סער 15, רמת נבון</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Handle quantity selectors
+            const plusBtns = document.querySelectorAll('.plus');
+            const minusBtns = document.querySelectorAll('.minus');
+            
+            plusBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const targetId = this.getAttribute('data-target');
+                    const input = document.getElementById(targetId);
+                    input.value = parseInt(input.value) + 1;
+                });
+            });
+            
+            minusBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const targetId = this.getAttribute('data-target');
+                    const input = document.getElementById(targetId);
+                    const currentValue = parseInt(input.value);
+                    if (currentValue > 0) {
+                        input.value = currentValue - 1;
+                    }
+                });
+            });
+            
+            // Handle form submission
+            const form = document.getElementById('orderForm');
+            const successMessage = document.getElementById('successMessage');
+            
+            form.addEventListener('submit', function(e) {
+                // Validate form
+                const fullName = document.getElementById('fullName').value;
+                const areaCode = document.getElementById('areaCode').value;
+                const phoneNumber = document.getElementById('phoneNumber').value;
+                const package1 = parseInt(document.getElementById('package1').value);
+                const package2 = parseInt(document.getElementById('package2').value);
+                const package3 = parseInt(document.getElementById('package3').value);
+                const package4 = parseInt(document.getElementById('package4').value);
+                
+                if (!fullName || !phoneNumber) {
+                    alert('אנא מלא את כל השדות החובה');
+                    e.preventDefault();
+                    return false;
+                }
+                
+                if (package1 + package2 + package3 + package4 === 0) {
+                    alert('אנא בחר לפחות מארז אחד');
+                    e.preventDefault();
+                    return false;
+                }
+                
+                // Simple phone validation (should be 7 digits)
+                const phoneRegex = /^\d{7}$/;
+                if (!phoneRegex.test(phoneNumber)) {
+                    alert('אנא הזן מספר טלפון נייד תקין (7 ספרות ללא קידומת)');
+                    e.preventDefault();
+                    return false;
+                }
+                
+                // Combine the area code and phone number into a hidden field for better formatting
+                let fullPhone = document.createElement('input');
+                fullPhone.type = 'hidden';
+                fullPhone.name = 'fullPhone';
+                fullPhone.value = `${areaCode}-${phoneNumber}`;
+                form.appendChild(fullPhone);
+                
+                // Calculate total price for order summary
+                let totalPrice = (package1 * 135) + (package2 * 175) + (package3 * 40) + (package4 * 35);
+                
+                // Add a hidden field with the order summary
+                let orderSummary = document.createElement('input');
+                orderSummary.type = 'hidden';
+                orderSummary.name = 'orderSummary';
+                orderSummary.value = `סיכום הזמנה:
+מארז פירות מפנק (135₪): ${package1} יחידות
+מארז פירות מפנק פלוס (175₪): ${package2} יחידות
+מארז תמר מג'הול (40₪): ${package3} יחידות
+מנגו חתוך (35₪): ${package4} יחידות
+סה"כ לתשלום: ${totalPrice}₪`;
+                form.appendChild(orderSummary);
+            });
+            
+            // Check if we need to show the success message (after redirect back from Formspree)
+            if (window.location.search.includes('submitted=true')) {
+                form.style.display = 'none';
+                successMessage.style.display = 'block';
+                window.scrollTo({
+                    top: successMessage.offsetTop - 100,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    </script>
+</body>
+</html>
